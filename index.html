@@ -1,0 +1,2444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="SOLWAY – End-to-End Solar Solutions. Premium solar panels, inverters, mounting structures, and BOS components across India.">
+<meta name="keywords" content="solar energy, solar panels, inverters, renewable energy, India, SOLWAY">
+<title>SOLWAY – Powering Tomorrow Through Smarter Solar Solutions</title>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Cormorant:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
+
+<!-- Lenis Smooth Scroll -->
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+<style>
+:root {
+  --navy: #081A34;
+  --navy-mid: #0D2247;
+  --navy-light: #21324F;
+  --gold: #F3A41D;
+  --gold-light: #F7BE5A;
+  --gold-dim: rgba(243,164,29,0.15);
+  --steel: #566A87;
+  --steel-light: #7A8FA8;
+  --maroon: #6A0015;
+  --green: #0B4A08;
+  --white: #FFFFFF;
+  --gray: #A8B4C4;
+  --gray-dim: rgba(168,180,196,0.6);
+  --glass: rgba(13,34,71,0.6);
+  --glass-border: rgba(243,164,29,0.2);
+  --font-display: 'Cormorant Garamond', 'Georgia', serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'Space Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: auto; }
+
+body {
+  background: var(--navy);
+  color: var(--white);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ─── CUSTOM CURSOR ─── */
+#cursor {
+  position: fixed;
+  width: 12px; height: 12px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%,-50%);
+  transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease, background 0.3s ease;
+  mix-blend-mode: screen;
+}
+#cursor-ring {
+  position: fixed;
+  width: 40px; height: 40px;
+  border: 1.5px solid rgba(243,164,29,0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%,-50%);
+  transition: all 0.15s ease;
+}
+body:hover #cursor { opacity: 1; }
+
+/* ─── SCROLL PROGRESS ─── */
+#scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--steel));
+  z-index: 9999;
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+/* ─── NAVIGATION ─── */
+#navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 0 5%;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(8,26,52,0.0);
+  backdrop-filter: blur(0px);
+  border-bottom: 1px solid transparent;
+  transition: all 0.4s ease;
+}
+#navbar.scrolled {
+  background: rgba(8,26,52,0.88);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(243,164,29,0.12);
+}
+.nav-logo {
+  height: 38px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-logo img { height: 38px; width: auto; object-fit: contain; }
+.nav-logo-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.nav-logo-text .sol { color: var(--gold); }
+.nav-logo-text .way { color: var(--steel-light); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  list-style: none;
+}
+.nav-links a {
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  position: relative;
+  transition: color 0.3s;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: width 0.3s ease;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-cta {
+  background: var(--gold);
+  color: var(--navy) !important;
+  padding: 8px 20px;
+  border-radius: 4px;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em;
+  transition: all 0.3s ease !important;
+}
+.nav-cta:hover { background: var(--gold-light) !important; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(243,164,29,0.3); }
+.nav-cta::after { display: none !important; }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: none;
+  padding: 4px;
+}
+.hamburger span {
+  width: 24px; height: 2px;
+  background: var(--white);
+  transition: all 0.3s;
+}
+
+/* ─── HERO ─── */
+#home {
+  position: relative;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(8,26,52,0.2) 0%, rgba(8,26,52,0.55) 50%, rgba(8,26,52,0.92) 100%),
+    linear-gradient(135deg, rgba(243,164,29,0.08) 0%, transparent 50%),
+    url('https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1800&q=90&auto=format&fit=crop') center/cover no-repeat;
+  transform: scale(1.08);
+  will-change: transform;
+}
+
+.hero-particles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0;
+  animation: particleDrift linear infinite;
+}
+
+@keyframes particleDrift {
+  0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.2; }
+  100% { transform: translateY(-20vh) translateX(60px); opacity: 0; }
+}
+
+/* Energy flow lines */
+.energy-lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.energy-line {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(243,164,29,0.4), transparent);
+  animation: energyFlow linear infinite;
+  opacity: 0;
+}
+@keyframes energyFlow {
+  0% { transform: translateX(-100%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 0.5; }
+  100% { transform: translateX(200%); opacity: 0; }
+}
+
+/* Grid overlay */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(86,106,135,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(86,106,135,0.08) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  max-width: 900px;
+  padding: 0 8%;
+  padding-top: 72px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(243,164,29,0.1);
+  border: 1px solid rgba(243,164,29,0.3);
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  opacity: 0;
+}
+.hero-badge-dot {
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.6); }
+}
+
+.hero-headline {
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 7vw, 6.5rem);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+}
+.hero-headline .line { display: block; overflow: hidden; }
+.hero-headline .word { display: inline-block; }
+.hero-headline .gold { color: var(--gold); font-style: italic; font-weight: 400; }
+
+.hero-sub {
+  font-size: clamp(1.05rem, 1.7vw, 1.25rem);
+  color: var(--gray);
+  line-height: 1.75;
+  max-width: 560px;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  opacity: 0;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--gold);
+  color: var(--navy);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  letter-spacing: 0.06em;
+  padding: 14px 28px;
+  border-radius: 4px;
+  text-decoration: none;
+  border: none;
+  cursor: none;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(243,164,29,0.4); }
+.btn-primary:hover::before { opacity: 1; }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  letter-spacing: 0.06em;
+  padding: 13px 28px;
+  border-radius: 4px;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.25);
+  cursor: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+}
+.btn-secondary:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(243,164,29,0.15); }
+
+.hero-stats {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  display: flex;
+  justify-content: flex-start;
+  gap: 0;
+  padding: 0 8% 2.5rem;
+  opacity: 0;
+  z-index: 10;
+}
+.hero-stat {
+  padding: 0 2.5rem 0 0;
+  border-right: 1px solid rgba(86,106,135,0.3);
+}
+.hero-stat:last-child { border-right: none; padding-right: 0; }
+.hero-stat-num {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--gold);
+  display: block;
+}
+.hero-stat-label {
+  font-size: 0.72rem;
+  color: var(--gray-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2.5rem;
+  right: 8%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  z-index: 10;
+}
+.scroll-indicator span {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--gray-dim);
+  letter-spacing: 0.2em;
+  writing-mode: vertical-rl;
+}
+.scroll-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollDrop 2s ease-in-out infinite;
+}
+@keyframes scrollDrop {
+  0% { transform: scaleY(0); transform-origin: top; opacity: 1; }
+  50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+}
+
+/* ─── SECTION COMMON ─── */
+section { position: relative; }
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--gold);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1rem;
+}
+.section-label::before {
+  content: '';
+  display: block;
+  width: 28px; height: 1px;
+  background: var(--gold);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4.5vw, 4rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+.section-title .gold { color: var(--gold); font-style: italic; font-weight: 400; }
+
+.section-body {
+  color: var(--gray);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  font-weight: 300;
+  max-width: 580px;
+}
+
+/* ─── ABOUT ─── */
+#about {
+  padding: 120px 8%;
+  background: linear-gradient(180deg, var(--navy) 0%, #061526 100%);
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+  margin-top: 5rem;
+}
+.about-visual {
+  position: relative;
+}
+.about-img-wrap {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+.about-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.8) brightness(0.85);
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+.about-img-wrap:hover img { transform: scale(1.04); filter: saturate(1) brightness(0.9); }
+
+.about-img-border {
+  position: absolute;
+  inset: -2px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--gold), transparent 60%);
+  z-index: -1;
+  opacity: 0.5;
+}
+
+.about-badge-float {
+  position: absolute;
+  bottom: -24px; right: -24px;
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 20px 24px;
+  text-align: center;
+}
+.about-badge-float .num {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--gold);
+  display: block;
+}
+.about-badge-float .label {
+  font-size: 0.75rem;
+  color: var(--gray);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.about-pillars {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+.pillar-card {
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(86,106,135,0.2);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.pillar-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.pillar-card:hover { border-color: rgba(243,164,29,0.3); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.3); }
+.pillar-card:hover::before { opacity: 1; }
+.pillar-icon {
+  font-size: 1.6rem;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+.pillar-title {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.4rem;
+}
+.pillar-text { font-size: 0.82rem; color: var(--gray); line-height: 1.6; }
+
+/* Stats row */
+.stats-row {
+  display: flex;
+  gap: 3rem;
+  margin-top: 5rem;
+  padding-top: 4rem;
+  border-top: 1px solid rgba(86,106,135,0.2);
+  flex-wrap: wrap;
+}
+.stat-item { text-align: center; }
+.stat-num {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4vw, 3.5rem);
+  font-weight: 800;
+  color: var(--gold);
+  display: block;
+  line-height: 1;
+}
+.stat-suffix { color: var(--gold); }
+.stat-label {
+  font-size: 0.78rem;
+  color: var(--gray);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 0.4rem;
+}
+
+/* ─── PRODUCTS ─── */
+#products {
+  padding: 120px 8%;
+  background: var(--navy-mid);
+  position: relative;
+  overflow: hidden;
+}
+#products::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(ellipse, rgba(243,164,29,0.06), transparent 70%);
+  pointer-events: none;
+}
+
+.products-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 4rem;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  background: rgba(86,106,135,0.1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.product-card {
+  position: relative;
+  overflow: hidden;
+  cursor: none;
+  background: #0a1f3a;
+  aspect-ratio: 16/10;
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.product-card:hover { z-index: 2; transform: scale(1.02); box-shadow: 0 32px 80px rgba(0,0,0,0.6); }
+
+.product-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease, filter 0.5s ease;
+  filter: saturate(0.7) brightness(0.6);
+}
+.product-card:hover .product-img { transform: scale(1.1); filter: saturate(0.9) brightness(0.5); }
+
+.product-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(8,26,52,0.95) 0%, rgba(8,26,52,0.3) 60%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem;
+}
+
+.product-number {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  margin-bottom: 0.5rem;
+}
+.product-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.2vw, 2.2rem);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.01em;
+}
+.product-desc { font-size: 0.85rem; color: var(--gray); line-height: 1.5; max-width: 300px; }
+
+.product-learn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 1.2rem;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  cursor: none;
+  padding: 0;
+  transition: gap 0.3s;
+}
+.product-learn:hover { gap: 14px; }
+.product-learn svg { transition: transform 0.3s; }
+.product-learn:hover svg { transform: translateX(4px); }
+
+.product-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at bottom left, rgba(243,164,29,0.12), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.product-card:hover .product-glow { opacity: 1; }
+
+/* ─── MODAL ─── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+}
+.modal-overlay.active { opacity: 1; pointer-events: all; }
+
+.modal-box {
+  background: #0a1f3a;
+  border: 1px solid rgba(243,164,29,0.2);
+  border-radius: 12px;
+  max-width: 900px;
+  width: 92%;
+  max-height: 88vh;
+  overflow-y: auto;
+  position: relative;
+  transform: translateY(40px) scale(0.96);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.modal-overlay.active .modal-box { transform: translateY(0) scale(1); }
+
+.modal-img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 12px 12px 0 0;
+  filter: saturate(0.8);
+}
+
+.modal-body { padding: 2.5rem; }
+.modal-close {
+  position: absolute;
+  top: 1.5rem; right: 1.5rem;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--white);
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  cursor: none;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  z-index: 2;
+}
+.modal-close:hover { background: var(--gold); color: var(--navy); }
+
+.modal-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  letter-spacing: -0.01em;
+}
+.modal-desc { color: var(--gray); line-height: 1.75; margin-bottom: 2rem; }
+
+.modal-features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.modal-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: var(--gray);
+}
+.modal-feature-dot {
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+/* ─── SERVICES HORIZONTAL ─── */
+#services {
+  padding: 120px 0;
+  background: linear-gradient(180deg, #061526 0%, var(--navy) 100%);
+  overflow: hidden;
+}
+.services-intro { padding: 0 8%; margin-bottom: 4rem; }
+
+.services-track-wrap {
+  position: relative;
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.services-track-wrap::-webkit-scrollbar { display: none; }
+.services-track {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1rem 8% 2.5rem;
+  cursor: grab;
+  will-change: transform;
+  width: max-content;
+}
+.services-track:active { cursor: grabbing; }
+
+.service-card {
+  flex: 0 0 320px;
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(86,106,135,0.2);
+  border-radius: 12px;
+  padding: 2.5rem 2rem;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: none;
+}
+.service-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  border: 1px solid var(--gold);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.service-card:hover { transform: translateY(-8px); box-shadow: 0 24px 60px rgba(0,0,0,0.4); }
+.service-card:hover::after { opacity: 0.4; }
+
+.service-icon-wrap {
+  width: 56px; height: 56px;
+  background: var(--gold-dim);
+  border: 1px solid rgba(243,164,29,0.25);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  transition: all 0.3s;
+}
+.service-card:hover .service-icon-wrap { background: rgba(243,164,29,0.2); transform: scale(1.1) rotate(-5deg); }
+
+.service-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.01em;
+}
+.service-desc { font-size: 0.88rem; color: var(--gray); line-height: 1.65; }
+
+/* ─── WHY SOLWAY ─── */
+#why {
+  padding: 120px 8%;
+  background: var(--navy-mid);
+}
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 4rem;
+}
+.why-card {
+  background: rgba(13,34,71,0.6);
+  border: 1px solid rgba(86,106,135,0.2);
+  border-radius: 12px;
+  padding: 2.5rem 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  cursor: none;
+}
+.why-card::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(243,164,29,0.1), transparent 70%);
+  transition: transform 0.4s;
+}
+.why-card:hover { border-color: rgba(243,164,29,0.35); transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+.why-card:hover::before { transform: scale(2); }
+.why-card-accent {
+  width: 3px; height: 32px;
+  background: var(--gold);
+  border-radius: 2px;
+  margin-bottom: 1.5rem;
+}
+.why-card-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.01em;
+}
+.why-card-text { font-size: 0.88rem; color: var(--gray); line-height: 1.65; }
+
+/* ─── INDUSTRIES ─── */
+#industries {
+  padding: 120px 8%;
+  background: linear-gradient(180deg, var(--navy) 0%, #061526 100%);
+}
+.industries-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 4rem;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(86,106,135,0.08);
+}
+.industry-item {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  cursor: none;
+}
+.industry-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: saturate(0.5) brightness(0.55);
+  transition: all 0.5s ease;
+}
+.industry-item:hover img { filter: saturate(0.8) brightness(0.45); transform: scale(1.06); }
+.industry-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(8,26,52,0.9) 0%, transparent 60%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  transition: all 0.4s;
+}
+.industry-item:hover .industry-overlay { background: linear-gradient(to top, rgba(8,26,52,0.95) 0%, rgba(8,26,52,0.3) 100%); }
+.industry-name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  transform: translateY(4px);
+  transition: transform 0.4s;
+}
+.industry-item:hover .industry-name { transform: translateY(0); }
+.industry-desc {
+  font-size: 0.8rem;
+  color: var(--gray);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+.industry-item:hover .industry-desc { max-height: 60px; }
+
+/* ─── PROCESS ─── */
+#process {
+  padding: 120px 8%;
+  background: var(--navy-mid);
+  position: relative;
+  overflow: hidden;
+}
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-top: 5rem;
+  position: relative;
+}
+
+/* energy line through process */
+.process-line {
+  position: absolute;
+  top: 60px; left: 10%;
+  width: 80%;
+  height: 1px;
+  background: rgba(86,106,135,0.3);
+  z-index: 0;
+}
+.process-line-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--steel));
+  width: 0%;
+  transition: width 1.5s ease;
+  box-shadow: 0 0 12px var(--gold);
+}
+
+.process-step {
+  text-align: center;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+.process-step-num {
+  width: 56px; height: 56px;
+  background: var(--navy);
+  border: 2px solid var(--steel);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--gold);
+  transition: all 0.4s;
+  position: relative;
+}
+.process-step-num.active {
+  border-color: var(--gold);
+  background: rgba(243,164,29,0.1);
+  box-shadow: 0 0 24px rgba(243,164,29,0.3);
+}
+.process-step-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.01em;
+}
+.process-step-text { font-size: 0.82rem; color: var(--gray); line-height: 1.6; }
+
+/* ─── TESTIMONIALS ─── */
+#testimonials {
+  padding: 120px 8%;
+  background: linear-gradient(180deg, #061526 0%, var(--navy) 100%);
+  overflow: hidden;
+}
+.testi-track {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 4rem;
+  animation: autoScroll 30s linear infinite;
+}
+.testi-track:hover { animation-play-state: paused; }
+@keyframes autoScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.testi-card {
+  flex: 0 0 380px;
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(86,106,135,0.2);
+  border-radius: 12px;
+  padding: 2.5rem 2rem;
+  position: relative;
+}
+.testi-card::before {
+  content: '"';
+  position: absolute;
+  top: 1rem; left: 1.5rem;
+  font-size: 5rem;
+  font-family: Georgia, serif;
+  color: var(--gold);
+  opacity: 0.15;
+  line-height: 1;
+}
+.testi-stars {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 1rem;
+}
+.testi-star { color: var(--gold); font-size: 0.9rem; }
+.testi-text { font-size: 0.92rem; color: var(--gray); line-height: 1.7; margin-bottom: 1.5rem; }
+.testi-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.testi-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--steel), var(--navy-light));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--gold);
+  border: 1px solid rgba(243,164,29,0.3);
+}
+.testi-name {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.testi-role { font-size: 0.78rem; color: var(--gray-dim); }
+
+/* ─── CONTACT ─── */
+#contact {
+  padding: 120px 8%;
+  background: #04111f;
+  position: relative;
+  overflow: hidden;
+}
+#contact::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 300px;
+  background: linear-gradient(to top, rgba(243,164,29,0.04), transparent);
+  pointer-events: none;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 6rem;
+  margin-top: 5rem;
+  align-items: start;
+}
+
+.contact-info-items { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
+.contact-info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.contact-info-icon {
+  width: 44px; height: 44px;
+  background: var(--gold-dim);
+  border: 1px solid rgba(243,164,29,0.25);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.contact-info-label { font-size: 0.72rem; color: var(--gray-dim); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.25rem; }
+.contact-info-value { font-size: 0.95rem; color: var(--white); }
+
+.contact-ctas {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
+}
+.btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #25D366;
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 12px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.3s;
+  cursor: none;
+}
+.btn-whatsapp:hover { background: #1ebe5b; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,211,102,0.3); }
+.btn-call {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid rgba(243,164,29,0.4);
+  color: var(--gold);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 11px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.3s;
+  cursor: none;
+}
+.btn-call:hover { background: rgba(243,164,29,0.1); transform: translateY(-2px); }
+
+/* Contact form */
+.contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+.form-label { font-size: 0.78rem; color: var(--gray-dim); letter-spacing: 0.1em; text-transform: uppercase; }
+.form-input, .form-textarea, .form-select {
+  background: rgba(13,34,71,0.6);
+  border: 1px solid rgba(86,106,135,0.3);
+  border-radius: 6px;
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  padding: 12px 16px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  outline: none;
+  cursor: none;
+}
+.form-input:focus, .form-textarea:focus, .form-select:focus {
+  border-color: rgba(243,164,29,0.5);
+  box-shadow: 0 0 0 3px rgba(243,164,29,0.08);
+}
+.form-textarea { resize: vertical; min-height: 120px; }
+.form-select option { background: var(--navy-mid); }
+
+/* Map placeholder */
+.map-wrap {
+  margin-top: 2rem;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(86,106,135,0.2);
+}
+.map-wrap iframe { width: 100%; height: 220px; border: none; filter: invert(0.85) hue-rotate(180deg) saturate(0.5); }
+
+/* ─── FOOTER ─── */
+footer {
+  background: #020d1a;
+  padding: 80px 8% 40px;
+  position: relative;
+  overflow: hidden;
+}
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 4rem;
+}
+.footer-brand-text {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 800;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.08em;
+}
+.footer-brand-text .sol { color: var(--gold); }
+.footer-brand-text .way { color: var(--steel-light); }
+.footer-tagline { font-size: 0.85rem; color: var(--gray); line-height: 1.6; max-width: 260px; margin-top: 0.75rem; }
+
+.footer-col-title {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+}
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+.footer-links a {
+  color: var(--gray);
+  text-decoration: none;
+  font-size: 0.88rem;
+  transition: color 0.3s;
+}
+.footer-links a:hover { color: var(--white); }
+
+.footer-social {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+.footer-social a {
+  width: 36px; height: 36px;
+  background: rgba(86,106,135,0.2);
+  border: 1px solid rgba(86,106,135,0.3);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+.footer-social a:hover { background: var(--gold-dim); border-color: var(--gold); color: var(--gold); }
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(86,106,135,0.15);
+  font-size: 0.8rem;
+  color: var(--gray-dim);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Energy wave footer */
+.footer-wave {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  overflow: hidden;
+}
+.footer-wave-inner {
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--gold), var(--steel), transparent);
+  animation: waveSlide 4s linear infinite;
+}
+@keyframes waveSlide {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ─── MOBILE NAV ─── */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  background: rgba(8,26,52,0.97);
+  backdrop-filter: blur(24px);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.mobile-menu.open { transform: translateX(0); }
+.mobile-menu a {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  font-weight: 500;
+  color: var(--white);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: color 0.3s;
+  font-style: italic;
+}
+.mobile-menu a:hover { color: var(--gold); }
+
+/* ─── FADE UP ANIMATION ─── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  .products-grid { grid-template-columns: 1fr 1fr; }
+  .why-grid { grid-template-columns: 1fr 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .products-grid { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr; }
+  .industries-grid { grid-template-columns: 1fr 1fr; }
+  .process-steps { grid-template-columns: 1fr; gap: 2rem; }
+  .process-line { display: none; }
+  .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .hero-stats { display: none; }
+  .about-pillars { grid-template-columns: 1fr; }
+  .modal-features { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .products-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  #cursor, #cursor-ring { display: none; }
+  body { cursor: auto; }
+  .btn-primary, .btn-secondary, .nav-cta, .form-input, .form-textarea, .form-select, .product-learn, .service-card, .why-card, .industry-item, .about-img-wrap, .pillar-card, .footer-social a, .btn-whatsapp, .btn-call { cursor: auto; }
+}
+
+@media (max-width: 480px) {
+  .industries-grid { grid-template-columns: 1fr; }
+  .hero-btns { flex-direction: column; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--navy); }
+::-webkit-scrollbar-thumb { background: var(--steel); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- Scroll Progress -->
+<div id="scroll-progress"></div>
+
+<!-- Navigation -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo" aria-label="SOLWAY Home">
+    <span class="nav-logo-text"><span class="sol">SOL</span><span class="way">WAY</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home" onclick="closeMobileMenu()">Home</a>
+  <a href="#about" onclick="closeMobileMenu()">About</a>
+  <a href="#products" onclick="closeMobileMenu()">Products</a>
+  <a href="#services" onclick="closeMobileMenu()">Services</a>
+  <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section id="home">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-particles" id="heroParticles"></div>
+  <div class="energy-lines" id="energyLines"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge" id="heroBadge">
+      <span class="hero-badge-dot"></span>
+      End-to-End Solar Solutions · India
+    </div>
+    <h1 class="hero-headline" id="heroHeadline">
+      <span class="line">Powering Tomorrow</span>
+      <span class="line">Through <span class="gold">Smarter Solar</span></span>
+      <span class="line">Solutions.</span>
+    </h1>
+    <p class="hero-sub" id="heroSub">Delivering premium solar products, engineering excellence, and end-to-end renewable energy solutions across India.</p>
+    <div class="hero-btns" id="heroBtns">
+      <a href="#products" class="btn-primary">
+        Explore Solutions
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#contact" class="btn-secondary">
+        Talk To Our Experts
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-stats" id="heroStats">
+    <div class="hero-stat">
+      <span class="hero-stat-num">500+</span>
+      <span class="hero-stat-label">Projects Supported</span>
+    </div>
+    <div class="hero-stat" style="padding-left: 2.5rem;">
+      <span class="hero-stat-num">1000+</span>
+      <span class="hero-stat-label">Customers Served</span>
+    </div>
+    <div class="hero-stat" style="padding-left: 2.5rem;">
+      <span class="hero-stat-num">100MW+</span>
+      <span class="hero-stat-label">Equipment Delivered</span>
+    </div>
+    <div class="hero-stat" style="padding-left: 2.5rem;">
+      <span class="hero-stat-num">99%</span>
+      <span class="hero-stat-label">Client Satisfaction</span>
+    </div>
+  </div>
+
+  <div class="scroll-indicator" id="scrollIndicator">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="section-label fade-up">Our Story</div>
+  <h2 class="section-title fade-up">Engineering a <span class="gold">Brighter</span><br>Energy Future</h2>
+  <div class="about-grid">
+    <div class="about-visual fade-up">
+      <div class="about-img-wrap">
+        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=800&q=85&auto=format&fit=crop" alt="Solar installation - SOLWAY" loading="lazy">
+        <div class="about-img-border"></div>
+      </div>
+      <div class="about-badge-float">
+        <span class="num">8+</span>
+        <span class="label">Years of Excellence</span>
+      </div>
+    </div>
+    <div class="about-content">
+      <p class="section-body fade-up" style="margin-bottom: 1.5rem;">SOLWAY was founded with a singular vision: to accelerate India's transition to clean, affordable solar energy by delivering world-class products and engineering expertise at every level of the value chain.</p>
+      <p class="section-body fade-up">From premium solar panel distribution to full-scale project consultation and after-sales support, we partner with EPCs, developers, and commercial clients to build solar infrastructure that performs — for decades.</p>
+
+      <div class="about-pillars fade-up">
+        <div class="pillar-card">
+          <span class="pillar-icon">🎯</span>
+          <div class="pillar-title">Our Mission</div>
+          <div class="pillar-text">To deliver premium-grade solar equipment and end-to-end engineering support that empowers India's renewable future.</div>
+        </div>
+        <div class="pillar-card">
+          <span class="pillar-icon">🔭</span>
+          <div class="pillar-title">Our Vision</div>
+          <div class="pillar-text">To become India's most trusted solar solutions partner, powering millions of homes and industries with clean energy.</div>
+        </div>
+        <div class="pillar-card">
+          <span class="pillar-icon">⚡</span>
+          <div class="pillar-title">Why SOLWAY</div>
+          <div class="pillar-text">Premium products, expert consultation, and a nationwide network — all under one trusted brand.</div>
+        </div>
+        <div class="pillar-card">
+          <span class="pillar-icon">🤝</span>
+          <div class="pillar-title">Our Promise</div>
+          <div class="pillar-text">Long-term partnerships built on transparency, technical excellence, and relentless after-sales support.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat-item fade-up" style="flex:1; min-width: 160px;">
+      <span class="stat-num"><span class="counter" data-target="500">0</span><span class="stat-suffix">+</span></span>
+      <div class="stat-label">Projects Supported</div>
+    </div>
+    <div class="stat-item fade-up" style="flex:1; min-width: 160px;">
+      <span class="stat-num"><span class="counter" data-target="1000">0</span><span class="stat-suffix">+</span></span>
+      <div class="stat-label">Customers Served</div>
+    </div>
+    <div class="stat-item fade-up" style="flex:1; min-width: 160px;">
+      <span class="stat-num"><span class="counter" data-target="100">0</span><span class="stat-suffix">MW+</span></span>
+      <div class="stat-label">Equipment Delivered</div>
+    </div>
+    <div class="stat-item fade-up" style="flex:1; min-width: 160px;">
+      <span class="stat-num"><span class="counter" data-target="99">0</span><span class="stat-suffix">%</span></span>
+      <div class="stat-label">Client Satisfaction</div>
+    </div>
+    <div class="stat-item fade-up" style="flex:1; min-width: 160px;">
+      <span class="stat-num"><span class="counter" data-target="50">0</span><span class="stat-suffix">+</span></span>
+      <div class="stat-label">Brand Partners</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRODUCTS ═══ -->
+<section id="products">
+  <div class="products-header">
+    <div>
+      <div class="section-label fade-up">What We Supply</div>
+      <h2 class="section-title fade-up">Premium Solar <span class="gold">Products</span></h2>
+    </div>
+    <p class="section-body fade-up" style="max-width:380px; font-size:0.92rem;">Industry-leading equipment sourced from certified global manufacturers — engineered for India's climate.</p>
+  </div>
+
+  <div class="products-grid">
+    <!-- Solar Panels -->
+    <div class="product-card fade-up" data-product="panels">
+      <img class="product-img" src="https://images.unsplash.com/photo-1541544537156-7627a7a4aa1c?w=800&q=85&auto=format&fit=crop" alt="Solar Panels">
+      <div class="product-glow"></div>
+      <div class="product-overlay">
+        <div class="product-number">01 / PRODUCT</div>
+        <div class="product-name">Solar Panels</div>
+        <div class="product-desc">High-efficiency monocrystalline and polycrystalline panels delivering maximum power output.</div>
+        <button class="product-learn" onclick="openModal('panels')">
+          Learn More
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7H12M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Solar Inverters -->
+    <div class="product-card fade-up" data-product="inverters">
+      <img class="product-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=85&auto=format&fit=crop" alt="Solar Inverters">
+      <div class="product-glow"></div>
+      <div class="product-overlay">
+        <div class="product-number">02 / PRODUCT</div>
+        <div class="product-name">Solar Inverters</div>
+        <div class="product-desc">String, central, and hybrid inverters from global-certified brands for every application scale.</div>
+        <button class="product-learn" onclick="openModal('inverters')">
+          Learn More
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7H12M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mounting Structures -->
+    <div class="product-card fade-up" data-product="mounting">
+      <img class="product-img" src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&q=85&auto=format&fit=crop" alt="Mounting Structures">
+      <div class="product-glow"></div>
+      <div class="product-overlay">
+        <div class="product-number">03 / PRODUCT</div>
+        <div class="product-name">Mounting Structures</div>
+        <div class="product-desc">Ground-mount, rooftop, and tracker systems engineered for structural integrity and maximum yield.</div>
+        <button class="product-learn" onclick="openModal('mounting')">
+          Learn More
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7H12M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- BOS Systems -->
+    <div class="product-card fade-up" data-product="bos">
+      <img class="product-img" src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?w=800&q=85&auto=format&fit=crop" alt="BOS Components">
+      <div class="product-glow"></div>
+      <div class="product-overlay">
+        <div class="product-number">04 / PRODUCT</div>
+        <div class="product-name">BOS Systems</div>
+        <div class="product-desc">Complete Balance of System components — DC cables, combiner boxes, meters, and safety equipment.</div>
+        <button class="product-learn" onclick="openModal('bos')">
+          Learn More
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7H12M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Product Modals -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <img class="modal-img" id="modalImg" src="" alt="">
+    <div class="modal-body">
+      <div class="modal-tag" id="modalTag"></div>
+      <h3 class="modal-title" id="modalTitle"></h3>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-features" id="modalFeatures"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SERVICES ═══ -->
+<section id="services">
+  <div class="services-intro">
+    <div class="section-label fade-up">What We Do</div>
+    <h2 class="section-title fade-up">Comprehensive Solar <span class="gold">Services</span></h2>
+    <p class="section-body fade-up" style="margin-top: 1rem;">From initial consultation to long-term maintenance — we cover every stage of your solar journey.</p>
+  </div>
+
+  <div class="services-track-wrap">
+    <div class="services-track" id="servicesTrack">
+      <div class="service-card">
+        <div class="service-icon-wrap">🚚</div>
+        <div class="service-title">Equipment Distribution</div>
+        <div class="service-desc">Pan-India logistics network ensuring timely, damage-free delivery of solar equipment to project sites.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon-wrap">🔬</div>
+        <div class="service-title">Solar Consultation</div>
+        <div class="service-desc">Expert technical consultation for system sizing, technology selection, and investment optimization.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon-wrap">📐</div>
+        <div class="service-title">Design & Engineering</div>
+        <div class="service-desc">Comprehensive single-line diagrams, structural layouts, and energy yield simulations using industry software.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon-wrap">🛒</div>
+        <div class="service-title">Procurement Support</div>
+        <div class="service-desc">Streamlined procurement with vendor selection, comparative analysis, and bulk pricing advantages.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon-wrap">🔧</div>
+        <div class="service-title">Installation Coordination</div>
+        <div class="service-desc">Project management and on-site coordination ensuring seamless installation with quality benchmarks.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon-wrap">📊</div>
+        <div class="service-title">Lead Generation</div>
+        <div class="service-desc">Qualified solar lead generation support for EPCs, installers, and channel partners nationwide.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon-wrap">🛡️</div>
+        <div class="service-title">After-Sales Service</div>
+        <div class="service-desc">Dedicated post-installation support, warranty management, and performance monitoring services.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon-wrap">⚙️</div>
+        <div class="service-title">AMC & Maintenance</div>
+        <div class="service-desc">Comprehensive Annual Maintenance Contracts to maximize uptime and ensure optimal system performance.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHY SOLWAY ═══ -->
+<section id="why">
+  <div class="section-label fade-up">Why Choose Us</div>
+  <h2 class="section-title fade-up">The SOLWAY <span class="gold">Advantage</span></h2>
+  <div class="why-grid">
+    <div class="why-card fade-up">
+      <div class="why-card-accent"></div>
+      <div class="why-card-title">Trusted Network</div>
+      <div class="why-card-text">Backed by a robust network of certified manufacturers, EPCs, and installers built over years of industry partnerships across India.</div>
+    </div>
+    <div class="why-card fade-up">
+      <div class="why-card-accent" style="background: var(--steel);"></div>
+      <div class="why-card-title">Premium Products Only</div>
+      <div class="why-card-text">We source exclusively from Tier-1 certified manufacturers with proven performance data — no compromises on quality.</div>
+    </div>
+    <div class="why-card fade-up">
+      <div class="why-card-accent"></div>
+      <div class="why-card-title">Expert Technical Support</div>
+      <div class="why-card-text">Our in-house team of solar engineers provides hands-on technical guidance throughout design, procurement, and commissioning.</div>
+    </div>
+    <div class="why-card fade-up">
+      <div class="why-card-accent" style="background: var(--steel);"></div>
+      <div class="why-card-title">Nationwide Reach</div>
+      <div class="why-card-text">An expanding pan-India logistics and service network ensuring fast delivery and local support wherever your project is located.</div>
+    </div>
+    <div class="why-card fade-up">
+      <div class="why-card-accent"></div>
+      <div class="why-card-title">Fast Delivery</div>
+      <div class="why-card-text">Optimized supply chain management with strategically positioned inventory to meet urgent project timelines without delays.</div>
+    </div>
+    <div class="why-card fade-up">
+      <div class="why-card-accent" style="background: var(--steel);"></div>
+      <div class="why-card-title">Long-Term Partnership</div>
+      <div class="why-card-text">We invest in relationships, not transactions. Our clients return because we deliver consistent value at every stage of the solar lifecycle.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ INDUSTRIES ═══ -->
+<section id="industries">
+  <div class="section-label fade-up">Industries We Serve</div>
+  <h2 class="section-title fade-up">Solar Solutions for <span class="gold">Every Sector</span></h2>
+  <div class="industries-grid" style="margin-top: 4rem;">
+    <div class="industry-item fade-up">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&auto=format&fit=crop" alt="Residential Solar">
+      <div class="industry-overlay">
+        <div class="industry-name">Residential</div>
+        <div class="industry-desc">Rooftop solar for homes, apartments, and housing societies.</div>
+      </div>
+    </div>
+    <div class="industry-item fade-up">
+      <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80&auto=format&fit=crop" alt="Commercial Solar">
+      <div class="industry-overlay">
+        <div class="industry-name">Commercial</div>
+        <div class="industry-desc">Office buildings, retail chains, and mixed-use developments.</div>
+      </div>
+    </div>
+    <div class="industry-item fade-up">
+      <img src="https://images.unsplash.com/photo-1565098772267-60af42b81ef2?w=600&q=80&auto=format&fit=crop" alt="Industrial Solar">
+      <div class="industry-overlay">
+        <div class="industry-name">Industrial</div>
+        <div class="industry-desc">Large-scale ground-mount and captive power for industries.</div>
+      </div>
+    </div>
+    <div class="industry-item fade-up">
+      <img src="https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=600&q=80&auto=format&fit=crop" alt="Warehouse Solar">
+      <div class="industry-overlay">
+        <div class="industry-name">Warehouses</div>
+        <div class="industry-desc">High-capacity rooftop systems for logistics and storage hubs.</div>
+      </div>
+    </div>
+    <div class="industry-item fade-up">
+      <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80&auto=format&fit=crop" alt="Institutions Solar">
+      <div class="industry-overlay">
+        <div class="industry-name">Institutions</div>
+        <div class="industry-desc">Schools, hospitals, and government facilities going green.</div>
+      </div>
+    </div>
+    <div class="industry-item fade-up">
+      <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&q=80&auto=format&fit=crop" alt="Solar EPC Partners">
+      <div class="industry-overlay">
+        <div class="industry-name">Solar EPC Partners</div>
+        <div class="industry-desc">End-to-end procurement and support for EPC contractors.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROCESS ═══ -->
+<section id="process">
+  <div class="section-label fade-up">How We Work</div>
+  <h2 class="section-title fade-up" style="max-width:600px;">Your Solar Journey,<br><span class="gold">Simplified.</span></h2>
+
+  <div style="position: relative; margin-top: 5rem;">
+    <div class="process-line">
+      <div class="process-line-fill" id="processLineFill"></div>
+    </div>
+    <div class="process-steps">
+      <div class="process-step fade-up">
+        <div class="process-step-num" id="pStep1">01</div>
+        <div class="process-step-title">Requirement Analysis</div>
+        <div class="process-step-text">We begin with a thorough analysis of your energy needs, site conditions, and project objectives.</div>
+      </div>
+      <div class="process-step fade-up">
+        <div class="process-step-num" id="pStep2">02</div>
+        <div class="process-step-title">Consultation</div>
+        <div class="process-step-text">Our experts design a tailored solar solution with technology recommendations and financial projections.</div>
+      </div>
+      <div class="process-step fade-up">
+        <div class="process-step-num" id="pStep3">03</div>
+        <div class="process-step-title">Product Selection</div>
+        <div class="process-step-text">We curate the ideal product mix from our certified manufacturer network for your specific application.</div>
+      </div>
+      <div class="process-step fade-up">
+        <div class="process-step-num" id="pStep4">04</div>
+        <div class="process-step-title">Procurement</div>
+        <div class="process-step-text">Streamlined purchase, quality inspection, and documentation ensuring compliance and traceability.</div>
+      </div>
+      <div class="process-step fade-up">
+        <div class="process-step-num" id="pStep5">05</div>
+        <div class="process-step-title">Delivery & Installation</div>
+        <div class="process-step-text">Coordinated logistics and on-site commissioning support to bring your system online on schedule.</div>
+      </div>
+      <div class="process-step fade-up">
+        <div class="process-step-num" id="pStep6">06</div>
+        <div class="process-step-title">After-Sales Support</div>
+        <div class="process-step-text">Ongoing monitoring, AMC, and dedicated support to maximize your system's lifetime performance.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section id="testimonials">
+  <div class="section-label fade-up">Client Stories</div>
+  <h2 class="section-title fade-up">Trusted by <span class="gold">Industry Leaders</span></h2>
+
+  <div class="testi-track" id="testiTrack">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">SOLWAY delivered 500kW worth of Tier-1 panels to our Gujarat solar farm on time and at competitive pricing. The technical support during commissioning was exceptional.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">RK</div>
+        <div>
+          <div class="testi-name">Rajesh Kulkarni</div>
+          <div class="testi-role">Director, SunPower EPC Pvt. Ltd.</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">The project consultation team at SOLWAY helped us reduce our capex by 18% through smarter product selection. Their AMC service keeps our systems at peak output year-round.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">PM</div>
+        <div>
+          <div class="testi-name">Priya Mehta</div>
+          <div class="testi-role">CFO, Greenleaf Industries</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">As a solar EPC contractor, SOLWAY is our go-to procurement partner. Their nationwide distribution network and quick turnaround has transformed our project execution capability.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">AS</div>
+        <div>
+          <div class="testi-name">Aditya Singh</div>
+          <div class="testi-role">CEO, NovaSolar Infrastructure</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">SOLWAY's BOS procurement support saved us weeks of vendor coordination. Reliable quality, honest pricing, and a team that genuinely cares about project success.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">VP</div>
+        <div>
+          <div class="testi-name">Vikram Patel</div>
+          <div class="testi-role">Project Manager, Horizon Energy</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">We installed a 1MW commercial rooftop for a warehouse client using SOLWAY's mounting structures and inverters. Quality was top-tier, and the after-sales support has been flawless.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">NK</div>
+        <div>
+          <div class="testi-name">Neha Krishnamurthy</div>
+          <div class="testi-role">Operations Head, BrightRoof Solutions</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">The engineering design service from SOLWAY was thorough and professional. Their yield simulations matched real-world output within 3% — impressive for such a complex hillside site.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">SJ</div>
+        <div>
+          <div class="testi-name">Suresh Joshi</div>
+          <div class="testi-role">Technical Director, SolarVentures India</div>
+        </div>
+      </div>
+    </div>
+    <!-- Duplicates for seamless loop -->
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">SOLWAY delivered 500kW worth of Tier-1 panels to our Gujarat solar farm on time and at competitive pricing. The technical support during commissioning was exceptional.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">RK</div>
+        <div>
+          <div class="testi-name">Rajesh Kulkarni</div>
+          <div class="testi-role">Director, SunPower EPC Pvt. Ltd.</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">The project consultation team at SOLWAY helped us reduce our capex by 18% through smarter product selection. Their AMC service keeps our systems at peak output year-round.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">PM</div>
+        <div>
+          <div class="testi-name">Priya Mehta</div>
+          <div class="testi-role">CFO, Greenleaf Industries</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">As a solar EPC contractor, SOLWAY is our go-to procurement partner. Their nationwide distribution network and quick turnaround has transformed our project execution capability.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">AS</div>
+        <div>
+          <div class="testi-name">Aditya Singh</div>
+          <div class="testi-role">CEO, NovaSolar Infrastructure</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact">
+  <div class="section-label fade-up">Get In Touch</div>
+  <h2 class="section-title fade-up">Let's Build Your <span class="gold">Solar Future</span></h2>
+
+  <div class="contact-grid">
+    <div>
+      <p class="section-body fade-up">Ready to explore solar solutions? Connect with our team for a no-obligation consultation, product enquiry, or partnership discussion.</p>
+
+      <div class="contact-info-items">
+        <div class="contact-info-item fade-up">
+          <div class="contact-info-icon">👤</div>
+          <div>
+            <div class="contact-info-label">Founder & CEO</div>
+            <div class="contact-info-value">Manav Shah</div>
+          </div>
+        </div>
+        <div class="contact-info-item fade-up">
+          <div class="contact-info-icon">📧</div>
+          <div>
+            <div class="contact-info-label">Email</div>
+            <div class="contact-info-value"><a href="mailto:shahmanav999@gmail.com" style="color: var(--gold); text-decoration: none;">shahmanav999@gmail.com</a></div>
+          </div>
+        </div>
+        <div class="contact-info-item fade-up">
+          <div class="contact-info-icon">📞</div>
+          <div>
+            <div class="contact-info-label">Phone</div>
+            <div class="contact-info-value"><a href="tel:+918879223223" style="color: var(--white); text-decoration: none;">+91 8879223223</a></div>
+          </div>
+        </div>
+        <div class="contact-info-item fade-up">
+          <div class="contact-info-icon">📍</div>
+          <div>
+            <div class="contact-info-label">Address</div>
+            <div class="contact-info-value">71 Marine Drive, 08 Giri Kunj,<br>Mumbai – 400020</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-ctas fade-up">
+        <a href="https://wa.me/918879223223?text=Hi%20SOLWAY%2C%20I%27m%20interested%20in%20your%20solar%20solutions." class="btn-whatsapp" target="_blank">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.116 1.523 5.847L0 24l6.326-1.499A11.93 11.93 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm5.894 16.833c-.246.693-1.452 1.323-2.005 1.373-.513.047-1.007.23-3.375-.703-2.846-1.1-4.67-3.98-4.81-4.163-.14-.182-1.133-1.51-1.133-2.882s.717-2.045.975-2.325c.257-.28.56-.35.747-.35.187 0 .373.002.537.01.172.01.404-.065.632.483.245.587.832 2.03.905 2.178.073.147.122.32.025.513-.098.194-.146.314-.29.484-.143.17-.3.38-.43.51-.143.143-.292.299-.126.586.167.288.74 1.22 1.59 1.977 1.093.97 2.014 1.27 2.302 1.413.287.143.455.12.622-.072.168-.193.717-.836.908-1.123.192-.288.384-.24.648-.144.264.096 1.678.791 1.965.935.288.144.48.216.55.336.07.12.07.694-.175 1.387z"/></svg>
+          WhatsApp Us
+        </a>
+        <a href="tel:+918879223223" class="btn-call">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18 h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.3-1.3a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7a2 2 0 011.72 2.03z"/></svg>
+          Call Now
+        </a>
+      </div>
+
+      <div class="map-wrap fade-up">
+        <iframe src="https://maps.google.com/maps?q=Marine+Drive+Mumbai&output=embed" allowfullscreen loading="lazy" title="SOLWAY Location - Mumbai"></iframe>
+      </div>
+    </div>
+
+    <div class="contact-form fade-up">
+      <h3 style="font-family: var(--font-display); font-size: 1.8rem; font-weight: 600; margin-bottom: 2rem; letter-spacing: -0.01em;">Send Us a Message</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-input" placeholder="Your Name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone Number</label>
+          <input type="tel" class="form-input" placeholder="+91 XXXXX XXXXX">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input type="email" class="form-input" placeholder="you@company.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Company / Organization</label>
+        <input type="text" class="form-input" placeholder="Company Name">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Service Interest</label>
+        <select class="form-select form-input">
+          <option value="">Select a service...</option>
+          <option>Solar Equipment Distribution</option>
+          <option>Project Consultation</option>
+          <option>Solar System Design</option>
+          <option>Procurement Support</option>
+          <option>Installation Coordination</option>
+          <option>AMC & Maintenance</option>
+          <option>End-to-End Solar Solutions</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Message</label>
+        <textarea class="form-textarea" placeholder="Tell us about your project or requirement..."></textarea>
+      </div>
+      <button class="btn-primary" onclick="submitForm(this)" style="width: 100%; justify-content: center; margin-top: 0.5rem;">
+        Send Enquiry
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-text"><span class="sol">SOL</span><span class="way">WAY</span></div>
+      <div class="footer-tagline">End-to-end solar solutions powering India's renewable energy transition through premium products and expert engineering.</div>
+      <div class="footer-social">
+        <a href="#" aria-label="LinkedIn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="#" aria-label="Twitter/X">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="#" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="mailto:shahmanav999@gmail.com" aria-label="Email">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About SOLWAY</a></li>
+        <li><a href="#products">Our Products</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#process">How We Work</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Products</div>
+      <ul class="footer-links">
+        <li><a href="#products">Solar Panels</a></li>
+        <li><a href="#products">Solar Inverters</a></li>
+        <li><a href="#products">Mounting Structures</a></li>
+        <li><a href="#products">BOS Components</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-links" style="gap: 1rem;">
+        <li style="color: var(--gray); font-size: 0.88rem; line-height: 1.5;">Manav Shah, Founder & CEO</li>
+        <li><a href="mailto:shahmanav999@gmail.com">shahmanav999@gmail.com</a></li>
+        <li><a href="tel:+918879223223">+91 8879223223</a></li>
+        <li style="color: var(--gray); font-size: 0.85rem; line-height: 1.5;">71 Marine Drive, 08 Giri Kunj,<br>Mumbai – 400020</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2025 SOLWAY. All rights reserved.</span>
+    <span>Powering Tomorrow Through Smarter Solar Solutions.</span>
+  </div>
+
+  <div class="footer-wave"><div class="footer-wave-inner"></div></div>
+</footer>
+
+<script>
+// ─── LENIS SMOOTH SCROLL ───
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  smooth: true,
+});
+function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+requestAnimationFrame(raf);
+
+// ─── GSAP REGISTER ───
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, TextPlugin);
+
+// ─── CURSOR ───
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursor-ring');
+let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX; mouseY = e.clientY;
+  gsap.to(cursor, { x: mouseX, y: mouseY, duration: 0.1, ease: 'power1.out' });
+});
+
+function animateCursorRing() {
+  ringX += (mouseX - ringX) * 0.12;
+  ringY += (mouseY - ringY) * 0.12;
+  if (cursorRing) {
+    cursorRing.style.left = ringX + 'px';
+    cursorRing.style.top = ringY + 'px';
+  }
+  requestAnimationFrame(animateCursorRing);
+}
+animateCursorRing();
+
+document.querySelectorAll('a, button, .product-card, .service-card, .why-card, .industry-item, .pillar-card').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    gsap.to(cursor, { width: 6, height: 6, background: '#F3A41D', duration: 0.3 });
+    gsap.to(cursorRing, { width: 56, height: 56, borderColor: 'rgba(243,164,29,0.6)', duration: 0.3 });
+  });
+  el.addEventListener('mouseleave', () => {
+    gsap.to(cursor, { width: 12, height: 12, background: '#F3A41D', duration: 0.3 });
+    gsap.to(cursorRing, { width: 40, height: 40, borderColor: 'rgba(243,164,29,0.5)', duration: 0.3 });
+  });
+});
+
+// ─── SCROLL PROGRESS ───
+lenis.on('scroll', ({ progress }) => {
+  document.getElementById('scroll-progress').style.width = (progress * 100) + '%';
+});
+
+// ─── NAVBAR ───
+ScrollTrigger.create({
+  start: 'top -80',
+  onEnter: () => document.getElementById('navbar').classList.add('scrolled'),
+  onLeaveBack: () => document.getElementById('navbar').classList.remove('scrolled'),
+});
+
+// ─── NAV SMOOTH SCROLL ───
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) lenis.scrollTo(target, { offset: -72, duration: 1.4 });
+  });
+});
+
+// ─── HAMBURGER ───
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+let menuOpen = false;
+
+hamburger.addEventListener('click', () => {
+  menuOpen = !menuOpen;
+  mobileMenu.classList.toggle('open', menuOpen);
+  hamburger.querySelectorAll('span')[0].style.transform = menuOpen ? 'rotate(45deg) translate(5px, 5px)' : '';
+  hamburger.querySelectorAll('span')[1].style.opacity = menuOpen ? '0' : '1';
+  hamburger.querySelectorAll('span')[2].style.transform = menuOpen ? 'rotate(-45deg) translate(5px, -5px)' : '';
+});
+
+function closeMobileMenu() {
+  menuOpen = false;
+  mobileMenu.classList.remove('open');
+  hamburger.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+}
+
+// ─── HERO PARTICLES ───
+const particlesContainer = document.getElementById('heroParticles');
+for (let i = 0; i < 30; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  const size = Math.random() * 4 + 1;
+  p.style.cssText = `
+    width: ${size}px; height: ${size}px;
+    left: ${Math.random() * 100}%;
+    animation-duration: ${Math.random() * 12 + 8}s;
+    animation-delay: ${Math.random() * 10}s;
+    opacity: 0;
+  `;
+  particlesContainer.appendChild(p);
+}
+
+// ─── ENERGY LINES ───
+const energyLinesContainer = document.getElementById('energyLines');
+for (let i = 0; i < 6; i++) {
+  const line = document.createElement('div');
+  line.className = 'energy-line';
+  const width = Math.random() * 30 + 20;
+  line.style.cssText = `
+    top: ${Math.random() * 100}%;
+    width: ${width}%;
+    animation-duration: ${Math.random() * 6 + 5}s;
+    animation-delay: ${Math.random() * 8}s;
+  `;
+  energyLinesContainer.appendChild(line);
+}
+
+// ─── HERO ANIMATIONS (GSAP) ───
+const heroTL = gsap.timeline({ delay: 0.2 });
+heroTL
+  .to('#heroBadge', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' })
+  .to('#heroHeadline', { opacity: 1, duration: 0.01 }, '-=0.2')
+  .from('#heroHeadline .line', {
+    y: 80, opacity: 0, duration: 0.9, stagger: 0.12, ease: 'power4.out'
+  }, '-=0.1')
+  .to('#heroSub', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.4')
+  .to('#heroBtns', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.3')
+  .to('#heroStats', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.2')
+  .to('#scrollIndicator', { opacity: 1, duration: 0.5 }, '-=0.1');
+
+// Hero parallax
+gsap.to('#heroBg', {
+  yPercent: 20,
+  ease: 'none',
+  scrollTrigger: { trigger: '#home', start: 'top top', end: 'bottom top', scrub: 1.5 }
+});
+
+// ─── FADE UP ANIMATIONS ───
+document.querySelectorAll('.fade-up').forEach(el => {
+  gsap.fromTo(el,
+    { opacity: 0, y: 50 },
+    {
+      opacity: 1, y: 0, duration: 0.85, ease: 'power3.out',
+      scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+    }
+  );
+});
+
+// ─── COUNTER ANIMATION ───
+document.querySelectorAll('.counter').forEach(counter => {
+  const target = parseInt(counter.getAttribute('data-target'));
+  ScrollTrigger.create({
+    trigger: counter,
+    start: 'top 85%',
+    once: true,
+    onEnter: () => {
+      gsap.to({ val: 0 }, {
+        val: target,
+        duration: 2.2,
+        ease: 'power2.out',
+        onUpdate: function() { counter.textContent = Math.round(this.targets()[0].val).toLocaleString('en-IN'); }
+      });
+    }
+  });
+});
+
+// ─── PROCESS LINE ───
+ScrollTrigger.create({
+  trigger: '#process',
+  start: 'top 60%',
+  once: true,
+  onEnter: () => {
+    gsap.to('#processLineFill', { width: '100%', duration: 2, ease: 'power2.out' });
+    document.querySelectorAll('[id^="pStep"]').forEach((el, i) => {
+      setTimeout(() => el.classList.add('active'), i * 300 + 300);
+    });
+  }
+});
+
+// ─── SERVICES DRAG SCROLL ───
+const track = document.getElementById('servicesTrack');
+let isDragging = false, startX, scrollLeft;
+track.addEventListener('mousedown', (e) => { isDragging = true; startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft; track.style.cursor = 'grabbing'; });
+track.addEventListener('mouseleave', () => { isDragging = false; track.style.cursor = 'grab'; });
+track.addEventListener('mouseup', () => { isDragging = false; track.style.cursor = 'grab'; });
+track.addEventListener('mousemove', (e) => {
+  if (!isDragging) return;
+  const x = e.pageX - track.offsetLeft;
+  track.scrollLeft = scrollLeft - (x - startX) * 1.5;
+});
+
+// ─── PRODUCT MODAL DATA ───
+const modalData = {
+  panels: {
+    img: 'https://images.unsplash.com/photo-1541544537156-7627a7a4aa1c?w=900&q=90&auto=format&fit=crop',
+    tag: 'Product 01',
+    title: 'Solar Panels',
+    desc: 'SOLWAY supplies a premium range of monocrystalline, polycrystalline, and bifacial solar panels from Tier-1 global manufacturers. Our panels deliver industry-leading efficiency ratings, robust weatherproofing, and 25+ year performance warranties — ideal for residential, commercial, and utility-scale applications across India.',
+    features: [
+      'Monocrystalline & bifacial options', 'Efficiency up to 22.8%', 'Anti-reflective tempered glass', 'IEC & BIS certified', 'PID resistant technology', '25-year linear power warranty', 'Salt mist & ammonia resistant', 'Available in 400W–700W modules'
+    ]
+  },
+  inverters: {
+    img: 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?w=900&q=90&auto=format&fit=crop',
+    tag: 'Product 02',
+    title: 'Solar Inverters',
+    desc: "We distribute a comprehensive range of string, central, hybrid, and micro-inverters from globally certified brands. Whether you're building a 5kW rooftop or a 10MW ground-mount, SOLWAY's inverter portfolio covers every application with proven reliability and smart monitoring capabilities.",
+    features: [
+      'String, central & hybrid variants', 'Grid-tie & off-grid solutions', 'IP65 / IP66 protection rating', 'Built-in MPPT technology', 'WiFi & RS485 monitoring', '98%+ European efficiency', 'Wide MPPT voltage range', 'Remote firmware updates'
+    ]
+  },
+  mounting: {
+    img: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=900&q=90&auto=format&fit=crop',
+    tag: 'Product 03',
+    title: 'Mounting Structures',
+    desc: 'SOLWAY offers engineered aluminum and galvanized steel mounting structures for rooftop, ground-mount, carport, and floating solar applications. Every structure undergoes wind and snow load analysis to ensure structural integrity across India\'s diverse climate zones.',
+    features: [
+      'Anodized aluminum alloy frames', 'Hot-dip galvanized steel options', 'Tilt-adjustable configurations', 'Ground-mount & rooftop kits', 'Carport & canopy structures', 'Wind load certified designs', 'Custom engineering available', 'Corrosion resistant coatings'
+    ]
+  },
+  bos: {
+    img: 'https://images.unsplash.com/photo-1565098772267-60af42b81ef2?w=900&q=90&auto=format&fit=crop',
+    tag: 'Product 04',
+    title: 'BOS Systems',
+    desc: 'A complete Balance of System ecosystem — from DC/AC solar cables and MC4 connectors to combiner boxes, surge protection devices, energy meters, and earthing systems. SOLWAY\'s BOS components are sourced from certified vendors to ensure safety compliance and long-term system reliability.',
+    features: [
+      'UV-resistant DC solar cables', 'MC4 / MC4-Evo2 connectors', 'String & array combiner boxes', 'AC & DC circuit breakers', 'Surge protection devices (SPD)', 'Bi-directional energy meters', 'Earthing & lightning systems', 'IEC 62548 compliant designs'
+    ]
+  }
+};
+
+function openModal(type) {
+  const d = modalData[type];
+  if (!d) return;
+  document.getElementById('modalImg').src = d.img;
+  document.getElementById('modalImg').alt = d.title;
+  document.getElementById('modalTag').textContent = d.tag;
+  document.getElementById('modalTitle').textContent = d.title;
+  document.getElementById('modalDesc').textContent = d.desc;
+  document.getElementById('modalFeatures').innerHTML = d.features.map(f =>
+    `<div class="modal-feature"><div class="modal-feature-dot"></div><span>${f}</span></div>`
+  ).join('');
+  const overlay = document.getElementById('modalOverlay');
+  overlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  lenis.stop();
+}
+
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('modalOverlay') && !e.target.classList.contains('modal-close')) return;
+  document.getElementById('modalOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+  lenis.start();
+}
+
+document.getElementById('modalOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeModal(e);
+});
+
+// ─── CONTACT FORM ───
+function submitForm(btn) {
+  const originalText = btn.innerHTML;
+  btn.innerHTML = 'Sending... <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.innerHTML = '✓ Message Sent Successfully!';
+    btn.style.background = '#0B4A08';
+    setTimeout(() => {
+      btn.innerHTML = originalText;
+      btn.disabled = false;
+      btn.style.background = '';
+    }, 3000);
+  }, 1800);
+}
+
+// ─── 3D TILT ON PRODUCT CARDS ───
+document.querySelectorAll('.product-card').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    gsap.to(card, { rotateY: x * 8, rotateX: -y * 6, duration: 0.4, ease: 'power2.out', transformPerspective: 1000 });
+  });
+  card.addEventListener('mouseleave', () => {
+    gsap.to(card, { rotateY: 0, rotateX: 0, duration: 0.5, ease: 'power3.out' });
+  });
+});
+
+// ─── WHY CARDS STAGGER ───
+gsap.from('.why-card', {
+  opacity: 0, y: 60, stagger: 0.12, duration: 0.8, ease: 'power3.out',
+  scrollTrigger: { trigger: '#why', start: 'top 75%', toggleActions: 'play none none none' }
+});
+
+// ─── FOOTER ENTRY ───
+gsap.from('footer .footer-grid > div', {
+  opacity: 0, y: 30, stagger: 0.1, duration: 0.7, ease: 'power3.out',
+  scrollTrigger: { trigger: 'footer', start: 'top 85%', toggleActions: 'play none none none' }
+});
+
+// ─── MAGNETIC BUTTONS ───
+document.querySelectorAll('.btn-primary, .btn-secondary').forEach(btn => {
+  btn.addEventListener('mousemove', (e) => {
+    const rect = btn.getBoundingClientRect();
+    const x = (e.clientX - rect.left - rect.width / 2) * 0.25;
+    const y = (e.clientY - rect.top - rect.height / 2) * 0.25;
+    gsap.to(btn, { x, y, duration: 0.3, ease: 'power2.out' });
+  });
+  btn.addEventListener('mouseleave', () => {
+    gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.3)' });
+  });
+});
+
+// ─── SECTION TITLE PARALLAX ───
+document.querySelectorAll('.section-title').forEach(el => {
+  gsap.to(el, {
+    yPercent: -8,
+    ease: 'none',
+    scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: 1.5 }
+  });
+});
+
+// ─── INDUSTRY GRID STAGGER ───
+gsap.from('.industry-item', {
+  opacity: 0, scale: 0.95, stagger: 0.08, duration: 0.7, ease: 'power3.out',
+  scrollTrigger: { trigger: '#industries', start: 'top 75%', toggleActions: 'play none none none' }
+});
+
+// ─── SERVICES CARDS ENTRY ───
+gsap.fromTo('.service-card',
+  { opacity: 0, x: 60 },
+  {
+    opacity: 1, x: 0, stagger: 0.08, duration: 0.7, ease: 'power3.out',
+    scrollTrigger: { trigger: '#services', start: 'top 75%', toggleActions: 'play none none none' }
+  }
+);
+
+console.log('%cSOLWAY – Powering Tomorrow Through Smarter Solar Solutions', 'color: #F3A41D; font-size: 14px; font-weight: bold;');
+</script>
+
+</body>
+</html>
